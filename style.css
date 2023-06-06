@@ -1,0 +1,83 @@
+body{
+    background-color: rgb(129, 212, 114);
+    font-family: sans-serif;
+    height: 100vh;
+}
+
+.container{
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 200px;
+    padding: 30px 10px;
+    width: 50%;
+}
+
+input{
+    background-color: rgb(223, 223, 223);
+    outline: none;
+    border: none;
+    margin-bottom: 10px;
+    width: 80%;
+    padding: 15px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+button{
+    background-color: rgb(38, 178, 38);
+    border: none;
+    padding: 15px;
+    width: 85%;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.container>p{
+     color: rgb(158, 158, 158);
+}
+
+h2{
+    text-align: center;
+    margin-top: 150px;
+}
+
+.userList{
+display: flex;
+flex-direction: column;
+
+}
+
+.tileList,
+.usersInfo{
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.tileList{
+    font-weight: bold;
+
+}
+
+.usersInfo{
+    background-color: aliceblue;
+    border: 2px solid aliceblue; 
+}
+
+.tileList>span{
+    padding: 5px;
+    width: 100%;
+    border:1.5px solid aliceblue ;
+}
+
+.usersInfo>span{
+    padding: 5px;
+    width: 100%;
+}
+
