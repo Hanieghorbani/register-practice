@@ -29,7 +29,6 @@ createBtn.addEventListener("click", () => {
     inputName.value.trim() &&
     inputPass.value.trim()
   ) {
-    usersList.innerHTML = ""
     let newUser = {
       id: Math.floor(Math.random() * 1000),
       name: inputName.value,
@@ -40,9 +39,7 @@ createBtn.addEventListener("click", () => {
     let store = tx.objectStore("users")
     let request = store.add(newUser)
     clearAll()
-    request.addEventListener("error", (err) => console.warn("requ error:", err))
     request.addEventListener("success", (e) => {
-      console.log("requ succ:", e)
       getUsers()
     })
   }
@@ -55,25 +52,22 @@ function clearAll() {
 }
 
 function getUsers() {
+  usersList.innerHTML = ""
   let tx = createTX("users", "readonly")
   let store = tx.objectStore("users")
   let request = store.getAll()
 
-  request.addEventListener("error", (err) =>
-    console.warn("get requ error:", err)
-  )
   request.addEventListener("success", (e) => {
-    console.log("get requ succ:", e)
     let allUsers = e.target.result
     let htmlUser
     allUsers.forEach((user) => {
-      console.log(user)
       htmlUser = `
       <div class="usersInfo">
       <span>${user.id}</span>
         <span>${user.name}</span>
         <span>${user.password}</span>
         <span>${user.email}</span>
+        <span class="remove" onclick="removeUser(${user.id})">Remove</span>
         </div>`
 
       usersList.insertAdjacentHTML("beforeend", htmlUser)
@@ -83,9 +77,14 @@ function getUsers() {
 
 function createTX(storeName, mode) {
   let tx = db.transaction(storeName, mode)
-
-  tx.addEventListener("error", (err) => console.warn("tx error:", err))
-  tx.addEventListener("complete", (e) => console.log("tx succ:", e))
-
   return tx
+}
+
+function removeUser(id) {
+  let tx = createTX("users", "readwrite")
+  let store = tx.objectStore("users")
+  let request = store.delete(id)
+  request.addEventListener("success", (e) => {
+    getUsers()
+  })
 }

@@ -80,3 +80,8 @@ h2 {
     border-left: 1px solid gray;
     padding-top: 10px;
 }
+
+.remove{
+    color: red;
+    cursor: pointer;
+}
